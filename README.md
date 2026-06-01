@@ -2,47 +2,74 @@
 
 Reusable starter folder for projects worked on by multiple AI models.
 
-Copy this folder into a new project, then customize the project-specific files:
-
-- `PROJECT_STATUS.md`
-- `AGENTS.md`
-- `.ai/settings.json`
-- `.ai/rules/*.md`
-- `.ai/memory/*.md`
-
 The `.ai/` folder is the shared control center. It contains workflow instructions, agent personas, reusable command prompts, copied skills, and project-local memory.
 
-## Quick Setup
+---
 
-Clone or download this repo, then run one of the following from **any directory**:
+## Quick Install (Recommended)
 
-### Option A — Batch file (easiest)
+No need to clone this repo. Just run **one command** to scaffold a new project:
+
+### Option A — npx + degit (easiest)
+
+```powershell
+npx -y degit marcnz0426-hub/Project-Set-up my-new-project
+```
+
+This downloads a clean copy of the boilerplate into `my-new-project/` — no git history, no extra files.
+
+> **Tip:** Replace `my-new-project` with whatever folder name you want. Use `./` to install into the current directory.
+
+### Option B — GitHub Template (browser)
+
+1. Go to [**github.com/marcnz0426-hub/Project-Set-up**](https://github.com/marcnz0426-hub/Project-Set-up)
+2. Click the green **"Use this template"** button
+3. Name your new repo and click **Create repository**
+
+> **Note:** To enable this, go to your repo's **Settings** and check **"Template repository"**.
+
+### Option C — git clone (manual)
+
+```powershell
+git clone --depth 1 https://github.com/marcnz0426-hub/Project-Set-up.git my-new-project
+Remove-Item -Recurse -Force my-new-project\.git
+```
+
+This shallow-clones the repo and removes the `.git` folder so you start fresh.
+
+---
+
+## Local Setup Scripts (Alternative)
+
+If you already have this repo cloned locally, you can use the included setup scripts to copy the boilerplate into a new project folder:
+
+### Batch file
 
 ```bat
 "C:\path\to\AI-Project-Starter\setup.bat" "C:\Path\To\Your\NewProject"
 ```
 
-### Option B — PowerShell
+### PowerShell
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File "C:\path\to\AI-Project-Starter\setup.ps1" "C:\Path\To\Your\NewProject"
 ```
 
-### Option C — From inside the repo folder
-
-```powershell
-cd "C:\path\to\AI-Project-Starter"
-powershell -ExecutionPolicy Bypass -File .\setup.ps1 "C:\Path\To\Your\NewProject"
-```
-
 > **Note:** The `-ExecutionPolicy Bypass` flag is required because Windows blocks `.ps1` scripts by default. It only applies to this single command and does not change your system settings.
+
+---
 
 ## After Setup
 
 1. `cd` into your new project folder.
-2. Run `git init` to initialize version control.
+2. Run `git init` to initialize version control (skip if you used the GitHub template).
 3. Ask any AI model to read `AGENTS.md` first.
-4. Customize `PROJECT_STATUS.md`, `AGENTS.md`, and `.ai/settings.json`.
+4. Customize the project-specific files:
+   - `PROJECT_STATUS.md`
+   - `AGENTS.md`
+   - `.ai/settings.json`
+   - `.ai/rules/*.md`
+   - `.ai/memory/*.md`
 5. Keep `PROJECT_STATUS.md` current during work.
 6. Log every meaningful bug fix or repeated issue in `.ai/memory/bug-log.md`.
 7. Before switching models or stopping, update `.ai/memory/handoff.md`.
