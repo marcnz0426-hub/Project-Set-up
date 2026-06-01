@@ -39,26 +39,6 @@ This shallow-clones the repo and removes the `.git` folder so you start fresh.
 
 ---
 
-## Local Setup Scripts (Alternative)
-
-If you already have this repo cloned locally, you can use the included setup scripts to copy the boilerplate into a new project folder:
-
-### Batch file
-
-```bat
-"C:\path\to\AI-Project-Starter\setup.bat" "C:\Path\To\Your\NewProject"
-```
-
-### PowerShell
-
-```powershell
-powershell -ExecutionPolicy Bypass -File "C:\path\to\AI-Project-Starter\setup.ps1" "C:\Path\To\Your\NewProject"
-```
-
-> **Note:** The `-ExecutionPolicy Bypass` flag is required because Windows blocks `.ps1` scripts by default. It only applies to this single command and does not change your system settings.
-
----
-
 ## After Setup
 
 1. `cd` into your new project folder.

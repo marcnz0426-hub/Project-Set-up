@@ -1,0 +1,3 @@
+# Exclude repo-level files from archive downloads (degit, git archive)
+README.md export-ignore
+.gitattributes export-ignore
