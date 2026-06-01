@@ -1,0 +1,26 @@
+{
+  "template_name": "AI Project Starter",
+  "template_type": "generic-multi-ai",
+  "version": "1.1.0",
+  "entrypoint": "AGENTS.md",
+  "workflow_order": ".ai/workflow/workflow-order.md",
+  "agent_skill_map": ".ai/workflow/agent-skill-map.md",
+  "skills_root": ".ai/skills",
+  "memory_root": ".ai/memory",
+  "memory_policy": ".ai/memory/memory-policy.md",
+  "memory_index": ".ai/memory/index.md",
+  "memory_archive_root": ".ai/memory/archive",
+  "memory_thresholds": {
+    "bug_log_max_active_entries": 30,
+    "bug_log_max_kb": 25,
+    "bug_entry_max_words": 150,
+    "fix_patterns_max_active": 20,
+    "lessons_max_active": 30,
+    "archive_resolved_after_days": 60
+  },
+  "requires_handoff_before_model_switch": true,
+  "requires_bug_log_after_fix": true,
+  "requires_memory_index_first": true,
+  "requires_memory_search_before_debugging": true,
+  "requires_pruning_when_threshold_exceeded": true
+}
