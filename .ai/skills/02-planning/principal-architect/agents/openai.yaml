@@ -1,0 +1,4 @@
+interface:
+  display_name: "Principal Architect"
+  short_description: "Architecture, schemas, and technical strategy"
+  default_prompt: "Use $principal-architect to design the system architecture, database schema, and technical strategy for this product."

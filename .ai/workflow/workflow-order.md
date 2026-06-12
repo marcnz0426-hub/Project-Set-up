@@ -5,6 +5,8 @@ Use this order unless the user explicitly asks for a narrower task.
 | Order | Phase | Skill Folder | Purpose |
 |---:|---|---|---|
 | 00 | Runtime / skill loading | `.ai/skills/00-runtime/using-superpowers` | Start by finding and applying relevant skills. |
+| 00b | Context loading | `.ai/context/` | Read INDEX.md, purpose.md, and load on-demand context files. |
+| 00c | Phase breakdown | `.ai/context/BUILD-PHASES.md` | Break down work into ordered phases with dependencies. |
 | 01 | Brainstorming | `.ai/skills/01-brainstorming/brainstorming` | Clarify intent, requirements, options, and tradeoffs. |
 | 02 | Planning | `.ai/skills/02-planning/writing-plans` | Convert requirements into small implementation tasks. |
 | 03 | Work isolation | `.ai/skills/03-work-isolation/using-git-worktrees` | Isolate feature work when appropriate. |
@@ -23,6 +25,25 @@ Use this order unless the user explicitly asks for a narrower task.
 ## Standard Flow
 
 Brainstorm -> Plan -> Isolate work -> Decide parallelization -> Execute -> Test-driven coding -> Debug if needed -> Request review -> Receive review -> Verify -> Finish branch.
+
+## Context Loading Flow
+
+When user uploads context files (PRD.md, UX-design.md, UX-copy.md, UI-design.md):
+
+1. Read `.ai/context/INDEX.md` (what files exist).
+2. Read `.ai/context/purpose.md` (always).
+3. For each uploaded file:
+   - Check file size
+   - If < 500 lines → read in full
+   - If > 500 lines → read frontmatter + Summary section
+   - Store: file name, type, key points, section map
+4. Synthesize:
+   - Confirm what was read (summary per file)
+   - Cross-reference files for conflicts/gaps
+   - Ask 1-3 clarifying questions if needed
+5. Create `.ai/context/BUILD-PHASES.md` (phase breakdown).
+6. Update `PROJECT_STATUS.md` with current state.
+7. Proceed to Planning phase (workflow step 02).
 
 ## Memory Rule
 

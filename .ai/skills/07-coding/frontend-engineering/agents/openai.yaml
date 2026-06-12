@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Engineering"
+  short_description: "User-facing web and mobile UI delivery"
+  default_prompt: "Use $frontend-engineering to implement the user-facing web or mobile interface for this product."

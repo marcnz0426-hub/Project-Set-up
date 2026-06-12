@@ -1,0 +1,4 @@
+interface:
+  display_name: "UX Writing"
+  short_description: "Microcopy, labels, errors, and onboarding text"
+  default_prompt: "Act as the UX Writing agent to craft product microcopy, labels, error states, and onboarding text."

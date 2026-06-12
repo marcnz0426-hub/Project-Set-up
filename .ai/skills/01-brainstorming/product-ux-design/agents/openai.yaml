@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product UX Design"
+  short_description: "Design flows, wireframe logic, and interface layout"
+  default_prompt: "Act as the Product UX Design agent to turn a product concept into user flows, wireframe logic, and interface layout."

@@ -1,7 +1,7 @@
 {
   "template_name": "AI Project Starter",
   "template_type": "generic-multi-ai",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "entrypoint": "AGENTS.md",
   "workflow_order": ".ai/workflow/workflow-order.md",
   "agent_skill_map": ".ai/workflow/agent-skill-map.md",
@@ -10,6 +10,30 @@
   "memory_policy": ".ai/memory/memory-policy.md",
   "memory_index": ".ai/memory/index.md",
   "memory_archive_root": ".ai/memory/archive",
+  "context_root": ".ai/context",
+  "context_index": ".ai/context/INDEX.md",
+  "context_core": ".ai/context/purpose.md",
+  "context_files": {
+    "architecture": ".ai/context/architecture.md",
+    "domain": ".ai/context/domain.md",
+    "build_phases": ".ai/context/BUILD-PHASES.md"
+  },
+  "design_root": "design",
+  "design_files": {
+    "tokens": "design/design-system/tokens.md",
+    "layout": "design/layout/guidelines.md",
+    "components": "design/components/inventory.md",
+    "accessibility": "design/accessibility/rules.md",
+    "brand": "design/brand/guidelines.md"
+  },
+  "rules_root": ".ai/rules",
+  "rules_mandatory": [
+    ".ai/rules/build-discipline.md",
+    ".ai/rules/security.md",
+    ".ai/rules/coding-standards.md",
+    ".ai/rules/testing.md",
+    ".ai/rules/git-workflow.md"
+  ],
   "memory_thresholds": {
     "bug_log_max_active_entries": 30,
     "bug_log_max_kb": 25,

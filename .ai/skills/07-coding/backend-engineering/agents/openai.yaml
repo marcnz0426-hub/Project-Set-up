@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend Engineering"
+  short_description: "APIs, business logic, and data integration"
+  default_prompt: "Use $backend-engineering to build APIs, business logic, integrations, and database-backed services."
