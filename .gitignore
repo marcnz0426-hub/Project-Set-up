@@ -27,3 +27,6 @@ yarn-error.log*
 
 # Gemini CLI Temp
 .gemini_security/
+
+# AI session cache (transient, regenerated each session)
+.ai/.session-state.json

@@ -6,6 +6,17 @@ These rules ensure the AI agent follows the PRD and design specs strictly withou
 
 **Build exactly what is specified. Nothing more, nothing less.**
 
+## Plan Mode (Phase -1)
+
+Before writing any code, making any commit, or creating any PR, you MUST pass through read-only Investigation mode:
+
+- **Read** and **search** first — explore the codebase, understand existing patterns
+- **Propose** your approach with evidence — reference files, line numbers, existing patterns
+- **No file writes** allowed during investigation
+- **No code changes** without explicit user approval
+
+Violation: Writing code without passing through Phase -1 first is a process violation.
+
 ## Rules
 
 ### 1. PRD is the Source of Truth
@@ -42,6 +53,14 @@ These rules ensure the AI agent follows the PRD and design specs strictly withou
 - Don't deviate from the specified user flows
 - Don't add interactions not in the wireframes
 - Don't change the information architecture
+
+### 5a. Partial Read Notification
+
+When a context file exceeds the 500-line threshold and reading is truncated, you MUST:
+
+- Record the exact line/position where reading stopped (file name, lines read, lines skipped, stopping section name)
+- Inform the user: which files were partially read, the read/skipped boundaries, and the total file size — so the user can point you to specific sections later
+- Save the read boundaries to `.ai/.session-state.json` under `context_read_progress` so future sessions can resume where you left off
 
 ### 6. Track Changes
 

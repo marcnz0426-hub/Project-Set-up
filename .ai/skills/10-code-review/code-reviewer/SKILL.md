@@ -53,6 +53,19 @@ Then include:
 - Brief strengths, only if useful.
 - Final assessment: `Ready`, `Ready with minor follow-up`, or `Not ready`.
 
+## Verification Checklist
+
+Before issuing verdict:
+
+- [ ] Actual diff inspected (not just the summary)
+- [ ] Changes compared against stated requirements
+- [ ] Edge cases and error paths checked
+- [ ] Test coverage evaluated (real behavior vs. mocks)
+- [ ] Security-sensitive code reviewed against security.md
+- [ ] Integration risks identified (migrations, config, backward compat)
+- [ ] Findings sorted by severity (Critical > Important > Minor)
+- [ ] Verdict ready: Ready / Ready with follow-up / Not ready
+
 ## Review Rules
 
 - Be specific and grounded in inspected code.

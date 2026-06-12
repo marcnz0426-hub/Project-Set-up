@@ -87,6 +87,43 @@ git commit -m "feat: add specific feature"
 ```
 ```
 
+## Task Priority (MoSCoW)
+
+Assign a priority to every task to guide execution order when time is constrained:
+
+| Priority | Label | Meaning | Drop Policy |
+|----------|-------|---------|-------------|
+| **M**ust have | Critical path | Feature fails without this | Cannot ship without |
+| **S**hould have | Important | Significant value, not blocking | Ship if behind schedule |
+| **C**ould have | Nice to have | Polish, minor enhancements | Drop first if time runs low |
+| **W**on't have | Out of scope | Explicitly deferred | Never include in this cycle |
+
+**Format in plans:** `**[M]** Task description` or `**[S]** Task description`.
+
+**Must-have tasks** are the minimum viable cut line. If all M tasks are done, the feature is shippable.
+
+## Effort Estimation Heuristics
+
+Use these heuristics to gauge task size and inform batching:
+
+| Complexity Level | Files Touched | Est. Time | Example |
+|-----------------|---------------|-----------|---------|
+| **Trivial** (fast-path) | 1 file, ≤5 lines | 2-5 min | Typo fix, rename, comment, config change |
+| **Small** | 1-2 files | 5-15 min | Single function, simple component variant |
+| **Medium** | 3-5 files | 15-45 min | New component with tests, API endpoint |
+| **Large** | 6-10 files | 45-90 min | Feature crossing backend + frontend + tests |
+| **X-Large** (split me) | 10+ files | 90+ min | Full feature, needs sub-agent or parallelization |
+
+**Flags that increase estimate:**
+- New module vs. modifying existing (+25%)
+- Requires tests (+30%)
+- Crosses layers (schema → API → UI, +50%)
+- Touches auth/permissions (+30%)
+- Security-sensitive code (+50%)
+- Migration or breaking change (+100%)
+
+**If any task exceeds 15 minutes estimated:** consider splitting it.
+
 ## Remember
 - Exact file paths always
 - Complete code in plan (not "add validation")

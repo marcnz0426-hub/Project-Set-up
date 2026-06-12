@@ -361,11 +361,46 @@ When adding mocks or test utilities, read @testing-anti-patterns.md to avoid com
 - Adding test-only methods to production classes
 - Mocking without understanding dependencies
 
+## Pragmatic Mode (Lighter TDD)
+
+When the full TDD cycle is too heavy for the task, use this pragmatic variant with the same spirit:
+
+### When to Use Pragmatic Mode
+- Rapid prototyping or spikes
+- Configuration or glue code
+- Trivial changes covered by existing tests
+- When your human partner explicitly approves
+
+### Pragmatic Rules
+
+1. **Write tests alongside code, not after.** The test can come minutes after the implementation, but both exist before you move to the next task.
+2. **Always write a regression test for bugs.** No exceptions — if you fixed it, prove it with a test.
+3. **Verify the test fails once.** For pragmatic mode, you can write the test and code in any order, but you must run the test, temporarily break the code, confirm the test fails, then restore the code and confirm it passes.
+4. **No "tests after everything is done."** If you batch all tests at the end, you're not doing TDD — you're doing post-hoc testing.
+5. **Edge cases still get tests.** The pragmatic shortcut is about order, not coverage.
+
+### Pragmatic vs. Full TDD Decision
+
+| Situation | Use |
+|-----------|-----|
+| New feature, core logic | Full TDD |
+| Bug fix | Full TDD |
+| UI component with visual tests | Pragmatic |
+| Configuration change | Pragmatic (or skip with approval) |
+| Prototype/exploration | Pragmatic, then throw away |
+| Refactoring with good existing tests | Pragmatic (add tests for new behavior) |
+
+### When to Escalate Back to Full TDD
+
+- Pragmatic mode produces a bug → next fix must use Full TDD
+- Your human partner expresses concern about quality → Full TDD for rest of session
+- Test coverage drops below agreed threshold → Full TDD until coverage recovers
+
 ## Final Rule
 
 ```
 Production code → test exists and failed first
-Otherwise → not TDD
+Otherwise → not TDD (unless Pragmatic Mode explicitly approved)
 ```
 
 No exceptions without your human partner's permission.

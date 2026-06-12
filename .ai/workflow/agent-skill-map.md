@@ -13,6 +13,7 @@ Use this map to choose which local skills belong to each agent role.
 
 - `.ai/skills/00-runtime/using-superpowers`
 - `.ai/skills/01-brainstorming/brainstorming`
+- `.ai/skills/02-planning/build-phases`
 - `.ai/skills/02-planning/writing-plans`
 - `.ai/skills/03-work-isolation/using-git-worktrees`
 - `.ai/skills/04-parallelization/dispatching-parallel-agents`
@@ -33,8 +34,13 @@ Use this map to choose which local skills belong to each agent role.
 
 - `.ai/skills/01-brainstorming/brainstorming`
 - `.ai/skills/02-planning/writing-plans`
-- `.ai/skills/01-brainstorming/product-manager`
-- `.ai/skills/01-brainstorming/product-ux-design`
+
+**Sub-roles (delegate for specialized work):**
+
+| Sub-role | Skill |
+|----------|-------|
+| Product Manager | `.ai/skills/01-brainstorming/product-manager` |
+| Product UX Design | `.ai/skills/01-brainstorming/product-ux-design` |
 
 ### Additional Context Reads
 
@@ -45,11 +51,17 @@ Use this map to choose which local skills belong to each agent role.
 ## Planner
 
 - `.ai/skills/01-brainstorming/brainstorming`
+- `.ai/skills/02-planning/build-phases`
 - `.ai/skills/02-planning/writing-plans`
 - `.ai/skills/03-work-isolation/using-git-worktrees`
 - `.ai/skills/04-parallelization/dispatching-parallel-agents`
-- `.ai/skills/02-planning/principal-architect`
-- `.ai/skills/02-planning/technical-program-manager`
+
+**Sub-roles (delegate for specialized work):**
+
+| Sub-role | Skill |
+|----------|-------|
+| Principal Architect | `.ai/skills/02-planning/principal-architect` |
+| Technical Program Manager | `.ai/skills/02-planning/technical-program-manager` |
 
 ### Additional Context Reads
 
@@ -63,10 +75,15 @@ Use this map to choose which local skills belong to each agent role.
 - `.ai/skills/08-debugging/systematic-debugging`
 - `.ai/skills/12-verification/verification-before-completion`
 - `.ai/skills/11-review-response/receiving-code-review`
-- `.ai/skills/07-coding/backend-engineering`
-- `.ai/skills/07-coding/frontend-engineering`
-- `.ai/skills/07-coding/ui-designer`
-- `.ai/skills/07-coding/ux-writing`
+
+**Sub-roles (delegate for specialized work):**
+
+| Sub-role | Skill |
+|----------|-------|
+| Backend Engineering | `.ai/skills/07-coding/backend-engineering` |
+| Frontend Engineering | `.ai/skills/07-coding/frontend-engineering` |
+| UI Designer | `.ai/skills/07-coding/ui-designer` |
+| UX Writing | `.ai/skills/07-coding/ux-writing` |
 
 ### Additional Context Reads
 
@@ -136,85 +153,4 @@ Use this map to choose which local skills belong to each agent role.
 
 - `.ai/context/architecture.md`
 
-## Product Manager
-
-- `.ai/skills/01-brainstorming/product-manager`
-
-### Additional Context Reads
-
-- `.ai/context/domain.md`
-- `.ai/context/architecture.md`
-
-## Product UX Design
-
-- `.ai/skills/01-brainstorming/product-ux-design`
-
-### Additional Context Reads
-
-- `.ai/context/domain.md`
-- `design/accessibility/rules.md`
-- `design/components/inventory.md`
-
-## Principal Architect
-
-- `.ai/skills/02-planning/principal-architect`
-
-### Additional Context Reads
-
-- `.ai/context/architecture.md`
-- `.ai/context/domain.md`
-- `design/` folder (all design files)
-- `.ai/rules/security.md`
-
-## Technical Program Manager
-
-- `.ai/skills/02-planning/technical-program-manager`
-
-### Additional Context Reads
-
-- `.ai/context/architecture.md`
-- `.ai/context/domain.md`
-- `.ai/context/BUILD-PHASES.md`
-
-## Backend Engineering
-
-- `.ai/skills/07-coding/backend-engineering`
-
-### Additional Context Reads
-
-- `.ai/context/architecture.md`
-- `.ai/context/domain.md`
-- `.ai/rules/coding-standards.md`
-- `.ai/rules/security.md`
-- `.ai/rules/testing.md`
-
-## Frontend Engineering
-
-- `.ai/skills/07-coding/frontend-engineering`
-
-### Additional Context Reads
-
-- `.ai/context/architecture.md`
-- `design/` folder (all design files)
-- `.ai/rules/coding-standards.md`
-- `.ai/rules/security.md`
-- `.ai/rules/testing.md`
-
-## UI Designer
-
-- `.ai/skills/07-coding/ui-designer`
-
-### Additional Context Reads
-
-- `design/` folder (all design files)
-- `.ai/context/architecture.md`
-
-## UX Writing
-
-- `.ai/skills/07-coding/ux-writing`
-
-### Additional Context Reads
-
-- `design/brand/guidelines.md`
-- `design/accessibility/rules.md`
-- `.ai/context/domain.md`
+<!-- Sub-roles collapsed into parent agents above. See Brainstormer, Planner, and Implementer sections for Product Manager, Product UX Design, Principal Architect, Technical Program Manager, Backend Engineering, Frontend Engineering, UI Designer, and UX Writing. -->

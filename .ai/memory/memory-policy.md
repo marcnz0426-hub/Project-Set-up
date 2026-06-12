@@ -19,16 +19,14 @@ Self-healing memory must be useful, small, and cheap to read.
 
 ## Required Metadata
 
-Bug entries must include:
+Bug entries must include these minimum fields:
 
 - `status`: open, resolved, archived
 - `severity`: critical, important, minor
-- `first_seen`
-- `last_seen`
-- `seen_count`
 - `tags`
-- `archive_after`
-- `delete_from_active`: yes/no
+- `first_seen`
+
+Optional fields (add when useful): `last_seen`, `seen_count`, `archive_after`, `delete_from_active`
 
 ## Retention Rules
 

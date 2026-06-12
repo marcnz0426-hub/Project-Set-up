@@ -148,12 +148,16 @@ Read the context files in .ai/context/ and plan the build.
 ```
 
 The agent will:
-1. Read `.ai/context/INDEX.md`
-2. Read `.ai/context/purpose.md`
-3. Read your uploaded context files (PRD, UX, UI, Copy)
-4. Synthesize and ask clarifying questions
-5. Create `.ai/context/BUILD-PHASES.md`
-6. Proceed to planning
+1. Initialize session cache (`.ai/.session-state.json`) to track progress across sessions
+2. Read `.ai/context/INDEX.md`
+3. Read `.ai/context/purpose.md`
+4. Read your uploaded context files (PRD, UX, UI, Copy)
+5. **If any file exceeds 500 lines**, the agent reads the Summary section, records where it stopped in `context_read_progress`, and tells you what was skipped
+6. Synthesize and ask clarifying questions
+7. Create `.ai/context/BUILD-PHASES.md`
+8. Proceed to planning
+
+> **Session continuity:** If the session ends mid-way (e.g., a file was only partially read), the next session picks up exactly where the last one left off — no re-reading required.
 
 ---
 
@@ -162,13 +166,14 @@ The agent will:
 The standard workflow follows these phases:
 
 ```
-Brainstorm → Plan → Isolate Work → Parallelize → Execute → Code → Debug → Review → Verify → Finish
+Investigate → Load Context → Brainstorm → Plan → (Isolate → Parallelize → Execute → Code → Debug → Review → Verify → Finish)
 ```
 
 Key rules:
 - **Always read** `.ai/context/purpose.md` and `.ai/rules/build-discipline.md`
 - **Before debugging** — read `.ai/memory/index.md` first
 - **Before stopping** — update `PROJECT_STATUS.md` and `.ai/memory/handoff.md`
+- **Partial read tracking** — files >500 lines are read in part; the agent records the boundary and notifies you so you can point it to specific sections later
 
 ---
 
@@ -244,7 +249,8 @@ project-root/
 │   │   ├── 12-verification/
 │   │   ├── 13-branch-finish/
 │   │   └── 90-meta/
-│   ├── templates/                     # Fill-in templates
+│   │   └── templates/                 # Fill-in templates (PRD, UX, UI, Copy)
+│   ├── .session-state.json            # Cross-session progress cache
 │   └── workflow/                      # Workflow config
 └── design/                            # Global design system (NEW)
     ├── README.md

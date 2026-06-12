@@ -1,6 +1,10 @@
 ---
 name: requesting-code-review
 description: Use when Codex has completed a task, feature, bugfix, implementation-plan step, batch of plan steps, or branch and should request an independent code review before continuing, merging, or claiming readiness. Trigger before merge, after major implementation milestones, during subagent-driven development checkpoints, when stuck and needing a fresh review, or after complex debugging fixes.
+requires:
+  - code-reviewer
+  - receiving-code-review
+  - verification-before-completion
 ---
 
 # Requesting Code Review
@@ -80,6 +84,17 @@ Triage every finding:
 - Ask for clarification when the reviewer identifies a risk but the fix is ambiguous.
 
 After fixes, request re-review for Critical and Important findings.
+
+## Verification Checklist
+
+Before requesting review:
+
+- [ ] Changed files identified and listed
+- [ ] Requirements/plan attached for comparison
+- [ ] Git range available (base + head SHA) or file list
+- [ ] Verification evidence collected (test output, build log, screenshots)
+- [ ] Known risks or open questions documented
+- [ ] Plan deviations called out explicitly
 
 ## Integration Notes
 

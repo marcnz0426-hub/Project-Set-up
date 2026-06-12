@@ -1,6 +1,10 @@
 ---
 name: executing-plans
 description: Use when you have a written implementation plan to execute in a separate session with review checkpoints
+requires:
+  - writing-plans
+  - using-git-worktrees
+  - finishing-a-development-branch
 ---
 
 # Executing Plans
@@ -66,6 +70,28 @@ After all tasks complete and verified:
 - Fundamental approach needs rethinking
 
 **Don't force through blockers** - stop and ask.
+
+## Verification Checklist
+
+Before marking a batch complete:
+
+- [ ] All tasks in batch marked completed
+- [ ] Each task's verification command ran and passed
+- [ ] No regressions in unrelated code
+- [ ] Test output recorded (number passed/failed)
+- [ ] All changes committed per task
+- [ ] No uncommitted changes remaining
+
+## Common Mistakes
+
+| Mistake | Fix |
+|---------|-----|
+| Skipping plan review | Read the full plan critically before touching any code |
+| Executing more than 3 tasks per batch | Stick to default batch size unless user says otherwise |
+| Skipping verification commands | Run every command the plan specifies, check output |
+| Ignoring test failures | Stop batch, report failures, don't proceed |
+| Working outside worktree | Always isolate in a worktree before starting |
+| Reporting without evidence | Show verification output, not just "tasks done" |
 
 ## Remember
 - Review plan critically first

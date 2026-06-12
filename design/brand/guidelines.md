@@ -4,17 +4,20 @@ title: Brand Guidelines
 version: 1.0
 last_updated: TBD
 sections:
-  - name: Brand Voice (lines 5-30)
-  - name: Tone (lines 32-55)
-  - name: Visual Identity (lines 57-80)
-  - name: Logo Usage (lines 82-110)
-  - name: Photography (lines 112-130)
-  - name: Co-branding (lines 132-150)
+  - name: Brand Voice
+  - name: Tone
+  - name: Visual Identity
+  - name: Logo Usage
+  - name: Photography
+  - name: Co-branding
 ---
 
 ## Summary
 
-[Write a 200-word max summary of the brand guidelines]
+<!-- TODO: Write a 200-word max summary of your brand guidelines.
+This file is read by frontend-engineering, ui-designer, and ux-writing
+agents to ensure consistent brand expression. Cover: brand personality,
+visual approach, and voice principles. -->
 
 ## Brand Voice
 
@@ -72,19 +75,27 @@ sections:
 
 ### Brand Colors
 
+<!-- TODO: Replace #XXXXXX with your actual brand hex values.
+These should match (or complement) the primary colors in design-system/tokens.md.
+The tokens file is for implementation; this file explains brand meaning. -->
+
 | Color | Hex | Usage |
 |-------|-----|-------|
-| Primary | #XXXXXX | Logo, primary actions |
-| Secondary | #XXXXXX | Accents, highlights |
-| Neutral | #XXXXXX | Text, backgrounds |
+| Primary | #1A73E8 | Logo, primary actions, brand identity |
+| Secondary | #5F6368 | Accents, highlights, supporting UI |
+| Neutral | #202124 | Text, backgrounds, structure |
 
 ### Brand Typography
 
+<!-- TODO: Replace [Brand Font] with your actual brand font name.
+If you don't have a custom brand font, use the primary font from tokens.md.
+The brand font is for marketing/branding; the design tokens font is for product UI. -->
+
 | Usage | Font | Weight |
 |-------|------|--------|
-| Headlines | [Brand Font] | Bold |
-| Body | [Brand Font] | Regular |
-| Code | Monospace | Regular |
+| Headlines | Inter | Bold (700) |
+| Body | Inter | Regular (400) |
+| Code | JetBrains Mono | Regular (400) |
 
 ### Visual Style
 

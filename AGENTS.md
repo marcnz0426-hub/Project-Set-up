@@ -4,6 +4,12 @@ Every AI agent must read this file before working on the project.
 
 ## Required Startup Sequence
 
+0. **Check session cache.** Read `.ai/.session-state.json`. If `session_id` is set and all mandatory files are cached (steps 1-9 below), skip directly to step 10 (on-demand loading). Otherwise, proceed through the full sequence and update the cache when done.
+
+   > **Fresh session:** If `.ai/.session-state.json` is missing or `session_id` is null, generate a new session_id (use current timestamp as ISO string or a short random hash), set `started_at` to the current time, reset `loaded_files` to all false, and write the updated JSON before proceeding to step 1.
+   > **Batching:** After step 0, read steps 1-5 in parallel where your platform supports batch reads.
+   > **Activity tracking:** Update `last_activity` with the current timestamp after reading or writing any file. This allows future agents to detect stale sessions.
+
 1. Read `AGENTS.md`.
 2. Read `.ai/README.md`.
 3. Read `PROJECT_STATUS.md`.
@@ -13,35 +19,23 @@ Every AI agent must read this file before working on the project.
 7. Read `.ai/workflow/workflow-order.md`.
 8. Read the relevant `.ai/agents/*.md` persona for the role you are performing.
 9. Read `.ai/memory/index.md` before opening detailed memory files.
-10. Load on-demand based on task:
+10. **Run environment preflight** — check `.ai/commands/health-check.md` or run: git status, verify required CLIs.
+11. Load on-demand based on task:
     - Planning/Coding → `.ai/context/architecture.md` + `design/` folder
     - Brainstorming → `.ai/context/domain.md`
     - Debugging → `.ai/context/domain.md`
     - Any task → `.ai/rules/coding-standards.md` + `.ai/rules/testing.md`
-11. Open detailed memory files only when the index suggests relevant prior context.
+12. Open detailed memory files only when the index suggests relevant prior context.
 
 ## Context Loading Workflow
 
-When user uploads context files (PRD.md, UX-design.md, UX-copy.md, UI-design.md):
-
-1. Read `.ai/context/INDEX.md` (what files exist).
-2. Read `.ai/context/purpose.md` (always).
-3. For each uploaded file:
-   - Check file size
-   - If < 500 lines → read in full
-   - If > 500 lines → read frontmatter + Summary section
-   - Store: file name, type, key points, section map
-4. Synthesize:
-   - Confirm what was read (summary per file)
-   - Cross-reference files for conflicts/gaps
-   - Ask 1-3 clarifying questions if needed
-5. Create `.ai/context/BUILD-PHASES.md` (phase breakdown).
-6. Update `PROJECT_STATUS.md` with current state.
-7. Proceed to Planning phase (workflow step 02).
+When user uploads context files (PRD.md, UX-design.md, UX-copy.md, UI-design.md), see **Phase 00.3 (Context Loading)** in `.ai/workflow/workflow-order.md` for the full flow. This is the canonical reference — the startup sequence above handles session initialization only.
 
 ## Operating Rules
 
+- **Plan Mode:** Before any action (code, commit, PR), pass through Phase -1 (Investigation). Read, search, and propose. No file writes, no code changes without explicit user approval.
 - Use the workflow in `.ai/workflow/workflow-order.md`.
+- **New project?** Start with `GETTING_STARTED.md` for setup guidance.
 - Use the skill map in `.ai/workflow/agent-skill-map.md` to choose skills.
 - Treat `.ai/skills/` as the local canonical skill library for this project.
 - Keep work understandable for the next AI model.

@@ -37,6 +37,17 @@ BEFORE claiming any status or expressing satisfaction:
 Skip any step = lying, not verifying
 ```
 
+## Verification Checklist (Full)
+
+Before any completion claim:
+
+- [ ] Tests pass (fresh run, full output checked)
+- [ ] Linter clean (0 errors)
+- [ ] Build succeeds (exit 0)
+- [ ] Security scan clean (no high/critical vulns, no hardcoded secrets)
+- [ ] Documentation reviewed (no TODO/FIXME, public APIs documented)
+- [ ] Requirements checklist complete (line-by-line against plan)
+
 ## Common Failures
 
 | Claim | Requires | Not Sufficient |
@@ -129,6 +140,29 @@ From 24 failure memories:
 - Paraphrases and synonyms
 - Implications of success
 - ANY communication suggesting completion/correctness
+
+## Security Scanning
+
+Before marking work complete, run security checks relevant to your stack:
+
+| Stack | Command | Expected |
+|-------|---------|----------|
+| Node.js | `npm audit --audit-level=high` | 0 high/critical vulnerabilities |
+| Python | `safety check` or `pip audit` | 0 known vulnerabilities |
+| Any | Check `.env` is in `.gitignore` | Not committed |
+| Any | Review diff for hardcoded secrets | None found |
+
+**If security issues are found:** Do not claim completion. Fix or document as known issue before proceeding.
+
+## Documentation Review
+
+Before completion, verify:
+
+- [ ] Public API functions have usage-revealing names (or docstrings if non-obvious)
+- [ ] No TODO or FIXME comments remain in new code
+- [ ] Any new configuration is documented (env vars, flags)
+- [ ] README or relevant docs are updated if behavior changed
+- [ ] Breaking changes are documented with migration notes
 
 ## The Bottom Line
 

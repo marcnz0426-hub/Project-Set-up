@@ -5,6 +5,28 @@ description: Use when starting feature work that needs isolation from current wo
 
 # Using Git Worktrees
 
+## Should You Use This Skill?
+
+Before starting, decide whether worktree isolation is appropriate:
+
+```
+Is the project using git?
+  → NO → Skip this skill entirely. Work in-place.
+  → YES ↓
+
+Can the agent environment run git commands?
+  → NO → Use branch-based isolation (git stash / git switch) instead.
+  → YES ↓
+
+Is this a multi-task parallelization with independent work?
+  → YES → Worktree isolation is recommended.
+  → NO → Is a feature branch needed that shouldn't affect the main workspace?
+    → YES → Worktree isolation is recommended.
+    → NO → Skip this skill. Work in-place on the current branch.
+```
+
+**If skipping:** Log the decision in `PROJECT_STATUS.md` and proceed to the next phase.
+
 ## Overview
 
 Git worktrees create isolated workspaces sharing the same repository, allowing work on multiple branches simultaneously without switching.

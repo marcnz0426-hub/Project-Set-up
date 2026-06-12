@@ -3,6 +3,16 @@
   "template_type": "generic-multi-ai",
   "version": "1.2.0",
   "entrypoint": "AGENTS.md",
+  "platform": {
+    "current": "generic",
+    "supported": ["claude-code", "opencode", "antigravity", "generic"],
+    "loading_mechanism": {
+      "claude-code": "Skill tool",
+      "opencode": "skill() function",
+      "antigravity": "Read SKILL.md directly",
+      "generic": "Read SKILL.md directly"
+    }
+  },
   "workflow_order": ".ai/workflow/workflow-order.md",
   "agent_skill_map": ".ai/workflow/agent-skill-map.md",
   "skills_root": ".ai/skills",
