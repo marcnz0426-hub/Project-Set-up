@@ -1,38 +1,54 @@
-name: CI
+name: "CI (Template - Disabled)"
 
-on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+# The following dummy triggers satisfy the VS Code GitHub Actions linter
+on: 
+  workflow_dispatch:
 
 jobs:
-  lint-test-build:
+  template_placeholder:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18, 20]
-
     steps:
-      - uses: actions/checkout@v4
+      - run: echo "This is a template. Real CI is commented out below."
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint
-        run: npm run lint
-        continue-on-error: true
-
-      - name: Test
-        run: npm test
-
-      - name: Build
-        run: npm run build
-        continue-on-error: true
+# ---------------------------------------------------------
+# Node.js CI Workflow (Commented out for the template)
+# Uncomment the following lines when you start a new Node.js project,
+# and delete the dummy code above.
+# ---------------------------------------------------------
+#
+# on:
+#   push:
+#     branches: [main, master]
+#   pull_request:
+#     branches: [main, master]
+# 
+# jobs:
+#   lint-test-build:
+#     runs-on: ubuntu-latest
+# 
+#     strategy:
+#       matrix:
+#         node-version: [18, 20]
+# 
+#     steps:
+#       - uses: actions/checkout@v4
+# 
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: npm
+# 
+#       - name: Install dependencies
+#         run: npm ci
+# 
+#       - name: Lint
+#         run: npm run lint
+#         continue-on-error: true
+# 
+#       - name: Test
+#         run: npm test
+# 
+#       - name: Build
+#         run: npm run build
+#         continue-on-error: true
