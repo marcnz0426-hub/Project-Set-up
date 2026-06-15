@@ -14,21 +14,22 @@ Use this order unless the user explicitly asks for a narrower task.
 | 00 | **Runtime & Setup** | | | |
 | &emsp;00.1 | Skill loading | `.ai/skills/00-runtime/using-superpowers` | Find and apply relevant skills. | All relevant skills loaded; `PROJECT_STATUS.md` up to date. |
 | &emsp;00.2 | Environment preflight | `.ai/commands/health-check.md` | Check git state, environment, tool availability, and dependency existence (package.json, requirements.txt, etc.) before work begins. | Git branch/status clean; required CLIs verified; project deps present; environment summary reported. |
-| &emsp;00.3 | Context loading | `.ai/context/` | Read INDEX.md, purpose.md, and load on-demand context files. | Core context files read; uploaded files parsed and cross-referenced. |
+| &emsp;00.3 | Context loading | `.ai/context/` | Read INDEX.md, purpose.md, and load on-demand context files. | Core context files read; uploaded files parsed; TRACEABILITY-MATRIX.md created. |
 | &emsp;00.4 | Phase breakdown | `.ai/skills/02-planning/build-phases` | Break down work into ordered phases with dependencies. | BUILD-PHASES.md created with numbered phases, tasks, and acceptance criteria. |
 | 01 | Brainstorming | `.ai/skills/01-brainstorming/brainstorming` | Clarify intent, requirements, options, and tradeoffs. | Requirements documented; user approved direction; 2-3 approaches explored. |
 | 02 | Planning | `.ai/skills/02-planning/writing-plans` | Convert requirements into small implementation tasks with MoSCoW priority. | Implementation plan with testable tasks; BUILD-PHASES.md updated. |
+| 02.5 | Architectural Spike | — | **[OPTIONAL]** Write quick, throwaway prototype code to validate technical unknowns. | Spike validated; throwaway code deleted; BUILD-PHASES.md updated; user approved to proceed to TDD. |
 | 03 | Work isolation | `.ai/skills/03-work-isolation/using-git-worktrees` | **[OPT-IN]** Only when using git worktrees. Isolate feature work from main branch. **Skip otherwise.** | Isolated workspace ready; clean test baseline passing. |
 | 04 | Parallelization | `.ai/skills/04-parallelization/dispatching-parallel-agents` | Split independent work across agents. | Independent tasks identified; agents dispatched with clear boundaries. |
 | 05 | Plan execution | `.ai/skills/05-execution/executing-plans` | Execute a written plan in batches. | First batch complete; progress reported to user. |
 | 06 | Subagent development | `.ai/skills/06-subagent-development/subagent-driven-development` | Coordinate implementer and reviewer subagents. | Implementer and reviewer subagents dispatched; outputs reviewed. |
 | 07 | Coding | `.ai/skills/07-coding/test-driven-development` | Write tests first for features and fixes (Full TDD or Pragmatic Mode). | All tasks implemented; tests passing; linter clean; build succeeds; security scan clean. |
-| 08 | Debugging | `.ai/skills/08-debugging/systematic-debugging` | Investigate root cause after reading the memory index. | Root cause identified; fix applied; tests updated; memory logged. |
-| 09 | Request review | `.ai/skills/09-review-request/requesting-code-review` | Ask for independent review after milestones. | Review packet prepared; reviewer dispatched or review completed. |
+| 08 | Debugging | `.ai/skills/08-debugging/systematic-debugging` | Investigate root cause after reading the memory index. | Root cause identified; automated regression test written explicitly triggering the bug; fix applied; tests updated; memory logged in fix-patterns.md. |
+| 09 | Request review | `.ai/skills/09-review-request/requesting-code-review` | Ask for independent review after milestones. | Review packet prepared (including Visual Dry Run screenshots); reviewer dispatched or review completed. |
 | 10 | Code review | `.ai/skills/10-code-review/code-reviewer` | Review implementation against plan and quality bar. | Review findings triaged (Critical/Important/Minor); all items addressed. |
 | 11 | Receive review | `.ai/skills/11-review-response/receiving-code-review` | Triage and implement valid review feedback. | Valid feedback implemented; re-verification complete. |
-| 12 | Verification | `.ai/skills/12-verification/verification-before-completion` | Verify before claiming done — tests, lint, build, **security scan**, and **docs review**. | All checks pass; no regressions; security scan clean; user notified. |
-| 13 | Branch finish | `.ai/skills/13-branch-finish/finishing-a-development-branch` | Decide merge, PR, cleanup, or keep-as-is. Archive BUILD-PHASES.md. | Branch merged/PR created or explicitly kept; worktree cleaned up; BUILD-PHASES.md archived. |
+| 12 | Verification | `.ai/skills/12-verification/verification-before-completion` | Verify before claiming done — tests, lint, build, **security scan**, and **docs review**. | All checks pass; no regressions; security scan clean; Visual Dry Run against ui-design.md complete; user notified. |
+| 13 | Branch finish | `.ai/skills/13-branch-finish/finishing-a-development-branch` | Decide merge, PR, cleanup, or keep-as-is. Archive BUILD-PHASES.md. | Branch merged/PR created or explicitly kept; Active Context Compression complete; worktree cleaned up; BUILD-PHASES.md archived. |
 | 14 | Release | — | Deploy to staging, smoke test, deploy to production, monitor. | Staging verified; production deploy green; rollback plan documented. |
 | 15 | Retrospective | — | Review what went well, what to improve, update memory patterns and bug log. | Lessons documented; fix patterns updated; memory index refreshed. |
 | 90 | Skill maintenance | `.ai/skills/90-meta/writing-skills` | Create, edit, or validate skills. | Skill created/edited; workflow docs updated if behavior changed. |
@@ -48,9 +49,9 @@ Use this order unless the user explicitly asks for a narrower task.
      ┌──────┴──────┐    └── Phase 07 (Coding) ──┐    └── Phase 00 (Setup)
      │ Phase 01    │         ┌──────────┐        │         Phase 01 (Brainstorm)
      │ (Brainstorm)│         │ Verify   │        │         Phase 02 (Plan)
-     │ Phase 02    │         │ Finish   │        │    ┌────┤
-     │ (Plan)      │         └──────────┘        │    │  Phase 03 (Isolate) [opt-in]
-     └──────┬──────┘                             │    │  Phase 04 (Parallelize)
+     │ Phase 02    │         │ Finish   │        │         Phase 02.5 (Spike) [opt-in]
+     │ (Plan)      │         └──────────┘        │    ┌────┤
+     └──────┬──────┘                             │    │  Phase 03 (Isolate) [opt-in]
             ▼                                    │    │  Phase 05 (Execute)
      Phase 07 (Coding)                            │    │  Phase 06 (Subagent Dev)
             │                                    │    ▼
@@ -81,10 +82,13 @@ Phase 01 (deps: 00)
      ▼
 Phase 02 (deps: 01)
      │
-     ├──▶ Phase 03 [opt-in] (deps: 02)
+     ├──▶ Phase 02.5 [opt-in] (deps: 02)
      │         │
      │         ▼
-     ├──▶ Phase 04 (deps: 02, can run in parallel with 03)
+     ├──▶ Phase 03 [opt-in] (deps: 02 or 02.5)
+     │         │
+     │         ▼
+     ├──▶ Phase 04 (deps: 02 or 02.5, can run in parallel with 03)
      │         │
      │         ▼
      ├──▶ Phase 05 (deps: 04)
@@ -153,6 +157,7 @@ Investigate → Coding → Verify → Finish
 | 00.3 | Summary of loaded context | Context is correct and complete |
 | 01 | 2-3 approaches with tradeoffs | Which direction to pursue |
 | 02 | Implementation plan with task list | Plan is acceptable |
+| 02.5 | Spike results | Discard code and proceed to TDD |
 | 07 | "Ready for review" notification | Proceed to review (or request changes) |
 | 12 | Verification results | Everything looks good to ship |
 | 13 | Merge/PR/keep decision | How to finish the branch |
@@ -254,14 +259,14 @@ When user uploads context files (PRD.md, UX-design.md, UX-copy.md, UI-design.md)
 3. For each uploaded file:
    - **Check for prior partial read:** Look up the file in `.ai/.session-state.json` `context_read_progress`. If an entry exists, resume reading from the recorded boundary (line N+1 onward) instead of starting over.
    - Check file size
-   - If < 500 lines → read in full
-   - If > 500 lines → read frontmatter + Summary section
+   - If < ~500 lines → read in full
+   - If > ~500 lines → use **Semantic Chunking**: read until the nearest logical boundary (e.g., `##` header or end of code block) after ~500 lines to ensure context remains fully formed.
    - Store: file name, type, key points, section map
-   - If truncation occurred (>500 lines threshold): record the exact line boundary where reading stopped (e.g. "read lines 1-150, stopped at end of Summary section, total 620 lines")
+   - If truncation occurred: record the exact line boundary where reading stopped (e.g. "read lines 1-520, stopped at end of Summary section, total 800 lines")
    - **If a prior partial read now reaches the end of the file:** remove its entry from `context_read_progress` in `.ai/.session-state.json` (progress is complete — no need to carry forward)
 4. Synthesize:
    - Confirm what was read (summary per file)
-   - Cross-reference files for conflicts/gaps
+   - Generate `TRACEABILITY-MATRIX.md` (mapping PRD features -> UX flows -> UI screens -> Architecture components) and explicitly highlight any gaps.
    - Ask 1-3 clarifying questions if needed
 5. **Announce partial reads to user:** For every file where reading was truncated, state the file name, the line range read, the line range skipped, and the stopping section — so the user knows what to point the agent to next.
 6. **Persist read progress:** Update `.ai/.session-state.json` field `context_read_progress` with the read boundaries recorded in step 3 so future sessions can resume from where this session stopped.
@@ -281,9 +286,12 @@ When user uploads context files (PRD.md, UX-design.md, UX-copy.md, UI-design.md)
 
 Full details in `.ai/skills/02-planning/build-phases/SKILL.md`.
 
-## Memory Rule
+## Memory & Rules Updates (Bug Fix Institutionalization)
 
 Before debugging or fixing, read `.ai/memory/index.md` first. Open detailed memory files only when relevant. If memory exceeds thresholds, use `.ai/commands/prune-memory.md`.
+
+- **Global Rules Enhancement**: If an architectural anti-pattern caused a bug, inject a strict preventative rule into `.ai/rules/coding-standards.md` (e.g., "NEVER use useEffect for data fetching").
+- **Fix Patterns Enhancement**: Use `.ai/memory/fix-patterns.md` as the passive dictionary for localized bug fixes (used only during Phase 08). Do NOT create active "Skills" for localized bugs to prevent skill bloat and overfitting. Instead, rely on automated regression tests to serve as permanent memory.
 
 ## Rate Limit / Model Switch Rule
 
