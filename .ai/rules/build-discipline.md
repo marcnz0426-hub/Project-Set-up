@@ -54,13 +54,13 @@ Violation: Writing code without passing through Phase -1 first is a process viol
 - Don't add interactions not in the wireframes
 - Don't change the information architecture
 
-### 5a. Partial Read Notification
+### 5a. Structural Skim & JIT Reading (Large Contexts)
 
-When a context file exceeds the 500-line threshold and reading is truncated, you MUST:
+When a context file (PRD, UI Specs) is massive, DO NOT read it end-to-end to build the initial roadmap, as this causes attention degradation and context poisoning. You MUST:
 
-- Record the exact line/position where reading stopped (file name, lines read, lines skipped, stopping section name)
-- Inform the user: which files were partially read, the read/skipped boundaries, and the total file size — so the user can point you to specific sections later
-- Save the read boundaries to `.ai/.session-state.json` under `context_read_progress` so future sessions can resume where you left off
+- **Structural Skim:** Extract and read only the Markdown Headers (`#`, `##`, `###`) to understand the complete structure of the project without losing details. Use this skim to generate the `BUILD-PHASES.md` roadmap.
+- **Just-In-Time (JIT) Reading:** Only read the deep, line-by-line details of a specific section when its corresponding phase actually begins.
+- **Flush Context:** After completing a phase, mentally flush its deep details to make room for the next phase's details.
 
 ### 6. Track Changes
 

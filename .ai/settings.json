@@ -1,18 +1,22 @@
 {
   "template_name": "AI Project Starter",
   "template_type": "generic-multi-ai",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "entrypoint": "AGENTS.md",
   "platform": {
     "current": "generic",
-    "supported": ["claude-code", "opencode", "antigravity", "generic"],
+    "supported": ["claude-code", "opencode", "antigravity", "cursor", "windsurf", "generic"],
     "loading_mechanism": {
       "claude-code": "Skill tool",
       "opencode": "skill() function",
       "antigravity": "Read SKILL.md directly",
+      "cursor": "Read SKILL.md directly",
+      "windsurf": "Read SKILL.md directly",
       "generic": "Read SKILL.md directly"
-    }
+    },
+    "adapters_root": ".ai/adapters"
   },
+  "manifest_path": ".ai/manifest.json",
   "workflow_order": ".ai/workflow/workflow-order.md",
   "agent_skill_map": ".ai/workflow/agent-skill-map.md",
   "skills_root": ".ai/skills",
@@ -26,7 +30,8 @@
   "context_files": {
     "architecture": ".ai/context/architecture.md",
     "domain": ".ai/context/domain.md",
-    "build_phases": ".ai/context/BUILD-PHASES.md"
+    "build_phases": ".ai/context/BUILD-PHASES.md",
+    "decisions": ".ai/context/decisions"
   },
   "design_root": "design",
   "design_files": {
@@ -56,5 +61,7 @@
   "requires_bug_log_after_fix": true,
   "requires_memory_index_first": true,
   "requires_memory_search_before_debugging": true,
-  "requires_pruning_when_threshold_exceeded": true
+  "requires_pruning_when_threshold_exceeded": true,
+  "requires_adr_for_architecture_decisions": true,
+  "requires_dashboard_update_at_phase_transition": true
 }

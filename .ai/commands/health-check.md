@@ -4,22 +4,24 @@ Run this before starting any work session (Phase 00.2) to verify the project sca
 
 ## Steps
 
-0. **Initialize session cache:**
+0. **Initialize session cache and manifest:**
    - Read `.ai/.session-state.json`
    - If `session_id` is null or missing: generate one (use current timestamp ISO string), set `started_at`, reset `loaded_files` to all false, write file
    - Set `last_activity` to current timestamp after every read/write operation
+   - Read `.ai/manifest.json`. If missing or invalid, generate it. Check hashes.
    - If all mandatory files are cached (loaded_files all true), skip steps 1-9 of AGENTS.md startup
-   - **Check `context_read_progress`** for entries from a prior session:
-     - If `session_id` was null before generation (brand new session): reset `context_read_progress` to `{}` — prior partial reads are from a different work context
-     - If `session_id` already existed (continuing session): entries are valid, report to agent: "Previous session partially read [N] file(s). Resume reading from the recorded boundary for each."
-     - Do NOT clear the entries during health-check — they are consumed during Phase 00.3 context loading (the agent reads the boundaried range and removes entries once fully read)
 
 1. **Verify entry point files exist:**
    ```
    AGENTS.md
    PROJECT_STATUS.md
    README.md
+   .ai/manifest.json
    ```
+
+2. **First-run detection:**
+   - Read `.ai/context/purpose.md`
+   - If it contains `TODO` or is mostly empty, suggest: "First-run detected. Please run the setup wizard (`.ai/commands/setup-wizard.md`) to configure your project."
 
 2. **Verify `.ai/` directory structure:**
    ```
@@ -91,12 +93,13 @@ When the health check finds missing files, attempt auto-creation before reportin
 
 | Missing File | Auto-Heal Action |
 |-------------|-------------------|
-| `.ai/.session-state.json` | Create with null session_id, current timestamp `started_at`, all `loaded_files` false, `context_read_progress: {}` |
+| `.ai/.session-state.json` | Create with null session_id, current timestamp `started_at`, all `loaded_files` false |
 | `.ai/context/purpose.md` | Create with template structure (section headers only, marked `TODO`) |
 | `.ai/context/INDEX.md` | Create with default index referencing purpose.md, architecture.md, domain.md |
 | `.ai/memory/index.md` | Create with empty sections |
 | `.ai/memory/memory-policy.md` | Copy from `.ai/rules/` equivalent or create with defaults |
 | `.ai/settings.json` | Warn only — too project-specific to auto-create |
+| `.ai/manifest.json` | Auto-generate based on current file states |
 | `AGENTS.md` | Warn only — critical entry point |
 
 **Procedure:**

@@ -47,6 +47,7 @@ Project context that agents read before planning or implementing:
 | `architecture.md` | Tech stack, design decisions | On-demand |
 | `domain.md` | Business rules, terminology | On-demand |
 | `BUILD-PHASES.md` | Agent-generated phase breakdown | Generated after context loading |
+| `decisions/` | Architecture Decision Records (ADRs) | Read existing before proposing new |
 
 **3-Tier Loading:** Read INDEX first → read Summary sections → load full sections only when needed.
 
@@ -114,30 +115,23 @@ Mandatory rules agents must follow:
 
 ## After Setup
 
-### 1. Upload Context Files
+### 1. Run the Setup Wizard
 
-Add your project context to `.ai/context/`:
+The fastest way to configure your project is to run the interactive setup wizard. Ask your AI to run:
 
 ```bash
-# Your PRD, UX design, UX copy, UI design files
-cp PRD.md .ai/context/
-cp UX-design.md .ai/context/
-cp UX-copy.md .ai/context/
-cp UI-design.md .ai/context/
+.ai/commands/setup-wizard.md
 ```
 
-### 2. Fill in Project Purpose
+This wizard will guide you through filling out your project purpose, architecture, domain rules, and design tokens.
 
-Edit `.ai/context/purpose.md` with your project vision, goals, and users.
+### 2. Platform Adapters
 
-### 3. Customize Design System
-
-Edit files in `design/` with your actual:
-- Design tokens (colors, typography, spacing)
-- Layout guidelines
-- Component inventory
-- Accessibility rules
-- Brand guidelines
+If you're using a specific AI coding tool, copy the matching adapter to your project root to give your agent a native entry point:
+- **Claude Code**: Copy `.ai/adapters/claude-code.md` to `CLAUDE.md`
+- **Cursor**: Copy `.ai/adapters/cursor.md` to `.cursorrules`
+- **Windsurf**: Copy `.ai/adapters/windsurf.md` to `.windsurfrules`
+- **Antigravity**: Copy `.ai/adapters/antigravity.md` to `.agents/AGENTS.md`
 
 ### 4. Start Building
 
@@ -148,16 +142,16 @@ Read the context files in .ai/context/ and plan the build.
 ```
 
 The agent will:
-1. Initialize session cache (`.ai/.session-state.json`) to track progress across sessions
+1. Initialize session cache and read `.ai/manifest.json` for smart file loading
 2. Read `.ai/context/INDEX.md`
 3. Read `.ai/context/purpose.md`
 4. Read your uploaded context files (PRD, UX, UI, Copy)
-5. **If any file exceeds 500 lines**, the agent reads the Summary section, records where it stopped in `context_read_progress`, and tells you what was skipped
+5. **If any file exceeds 500 lines**, the agent performs a **Structural Skim** (reading only the Markdown headers) to understand the scope without losing detail memory
 6. Synthesize and ask clarifying questions
-7. Create `.ai/context/BUILD-PHASES.md`
-8. Proceed to planning
+7. Create `.ai/context/BUILD-PHASES.md` based on the structural skim
+8. Proceed to planning, using **Just-In-Time (JIT) Reading** to read the deep details of each phase only when it begins
 
-> **Session continuity:** If the session ends mid-way (e.g., a file was only partially read), the next session picks up exactly where the last one left off — no re-reading required.
+> **Session continuity:** With manifest-based loading and JIT reading, a new session immediately knows which phase it is in and loads only the exact details needed for that phase.
 
 ---
 
@@ -173,7 +167,7 @@ Key rules:
 - **Always read** `.ai/context/purpose.md` and `.ai/rules/build-discipline.md`
 - **Before debugging** — read `.ai/memory/index.md` first
 - **Before stopping** — update `PROJECT_STATUS.md` and `.ai/memory/handoff.md`
-- **Partial read tracking** — files >500 lines are read in part; the agent records the boundary and notifies you so you can point it to specific sections later
+- **Large file handling** — Massive files use the **Structural Skim & JIT Reading** protocol to prevent attention degradation
 
 ---
 
@@ -217,6 +211,7 @@ project-root/
 ├── .ai/
 │   ├── README.md                      # Control center docs
 │   ├── settings.json                  # Project configuration
+│   ├── adapters/                      # Platform entry points (NEW)
 │   ├── agents/                        # 9 agent personas
 │   ├── commands/                      # Reusable prompt commands
 │   ├── context/                       # Project context (NEW)
@@ -225,7 +220,8 @@ project-root/
 │   │   ├── architecture.md
 │   │   ├── domain.md
 │   │   ├── BUILD-PHASES.md
-│   │   └── README.md
+│   │   ├── decisions/                 # ADR system
+│   │   └── templates/                 # Fill-in templates (PRD, UX, UI, Copy)
 │   ├── memory/                        # Self-healing memory
 │   ├── rules/                         # Mandatory rules (NEW)
 │   │   ├── build-discipline.md
@@ -249,8 +245,8 @@ project-root/
 │   │   ├── 12-verification/
 │   │   ├── 13-branch-finish/
 │   │   └── 90-meta/
-│   │   └── templates/                 # Fill-in templates (PRD, UX, UI, Copy)
 │   ├── .session-state.json            # Cross-session progress cache
+│   ├── manifest.json                  # Smart loader file hashes
 │   └── workflow/                      # Workflow config
 └── design/                            # Global design system (NEW)
     ├── README.md

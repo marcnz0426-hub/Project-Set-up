@@ -16,8 +16,8 @@ Use this order unless the user explicitly asks for a narrower task.
 | &emsp;00.2 | Environment preflight | `.ai/commands/health-check.md` | Check git state, environment, tool availability, and dependency existence (package.json, requirements.txt, etc.) before work begins. | Git branch/status clean; required CLIs verified; project deps present; environment summary reported. |
 | &emsp;00.3 | Context loading | `.ai/context/` | Read INDEX.md, purpose.md, and load on-demand context files. | Core context files read; uploaded files parsed; TRACEABILITY-MATRIX.md created. |
 | &emsp;00.4 | Phase breakdown | `.ai/skills/02-planning/build-phases` | Break down work into ordered phases with dependencies. | BUILD-PHASES.md created with numbered phases, tasks, and acceptance criteria. |
-| 01 | Brainstorming | `.ai/skills/01-brainstorming/brainstorming` | Clarify intent, requirements, options, and tradeoffs. | Requirements documented; user approved direction; 2-3 approaches explored. |
-| 02 | Planning | `.ai/skills/02-planning/writing-plans` | Convert requirements into small implementation tasks with MoSCoW priority. | Implementation plan with testable tasks; BUILD-PHASES.md updated. |
+| 01 | Brainstorming | `.ai/skills/01-brainstorming/brainstorming` | Clarify intent, requirements, options, and tradeoffs. | Requirements documented; user approved direction; 2-3 approaches explored; **ADR written for approved direction** (`.ai/context/decisions/`). |
+| 02 | Planning | `.ai/skills/02-planning/writing-plans` | Convert requirements into small implementation tasks with MoSCoW priority. | Implementation plan with testable tasks; BUILD-PHASES.md updated; **ADRs written for architecture decisions**. |
 | 02.5 | Architectural Spike | — | **[OPTIONAL]** Write quick, throwaway prototype code to validate technical unknowns. | Spike validated; throwaway code deleted; BUILD-PHASES.md updated; user approved to proceed to TDD. |
 | 03 | Work isolation | `.ai/skills/03-work-isolation/using-git-worktrees` | **[OPT-IN]** Only when using git worktrees. Isolate feature work from main branch. **Skip otherwise.** | Isolated workspace ready; clean test baseline passing. |
 | 04 | Parallelization | `.ai/skills/04-parallelization/dispatching-parallel-agents` | Split independent work across agents. | Independent tasks identified; agents dispatched with clear boundaries. |
@@ -166,6 +166,10 @@ Investigate → Coding → Verify → Finish
 
 For all other phase transitions, proceed automatically but log the transition in `PROJECT_STATUS.md`.
 
+**Dashboard rule:** At every phase transition (including automated ones), update the `PROJECT_STATUS.md` dashboard metrics: increment tasks complete, update phase status, log any new blockers. Do not just append to the log — update the summary tables at the top.
+
+**ADR rule:** When a user approves a significant technical direction (Phase 01) or architecture decision (Phase 02), write an ADR in `.ai/context/decisions/` using the template. Number sequentially.
+
 ## Error Taxonomy (Symptom → Rollback Target)
 
 When something goes wrong, diagnose the symptom below and roll back to the indicated phase. Re-run that phase's exit criteria before retrying the failed phase.
@@ -257,21 +261,18 @@ When user uploads context files (PRD.md, UX-design.md, UX-copy.md, UI-design.md)
 1. Read `.ai/context/INDEX.md` (what files exist).
 2. Read `.ai/context/purpose.md` (always).
 3. For each uploaded file:
-   - **Check for prior partial read:** Look up the file in `.ai/.session-state.json` `context_read_progress`. If an entry exists, resume reading from the recorded boundary (line N+1 onward) instead of starting over.
-   - Check file size
-   - If < ~500 lines → read in full
-   - If > ~500 lines → use **Semantic Chunking**: read until the nearest logical boundary (e.g., `##` header or end of code block) after ~500 lines to ensure context remains fully formed.
-   - Store: file name, type, key points, section map
-   - If truncation occurred: record the exact line boundary where reading stopped (e.g. "read lines 1-520, stopped at end of Summary section, total 800 lines")
-   - **If a prior partial read now reaches the end of the file:** remove its entry from `context_read_progress` in `.ai/.session-state.json` (progress is complete — no need to carry forward)
+   - Check file size.
+   - If < ~500 lines → read in full.
+   - If > ~500 lines → use **Structural Skim**: Extract and read only the Markdown Headers (`#`, `##`, `###`) to understand the document's structure without getting bogged down in line-by-line details. Do not attempt to read the full file end-to-end to build the initial roadmap.
+   - Store: file name, type, key points, and structural section map.
 4. Synthesize:
    - Confirm what was read (summary per file)
    - Generate `TRACEABILITY-MATRIX.md` (mapping PRD features -> UX flows -> UI screens -> Architecture components) and explicitly highlight any gaps.
    - Ask 1-3 clarifying questions if needed
-5. **Announce partial reads to user:** For every file where reading was truncated, state the file name, the line range read, the line range skipped, and the stopping section — so the user knows what to point the agent to next.
-6. **Persist read progress:** Update `.ai/.session-state.json` field `context_read_progress` with the read boundaries recorded in step 3 so future sessions can resume from where this session stopped.
-7. Create `.ai/context/BUILD-PHASES.md` (phase breakdown). See lifecycle rules below.
-8. Update `PROJECT_STATUS.md` with current state.
+5. **JIT Reading Enforcement:** Inform the user: "Massive context files detected. I performed a structural skim to generate the roadmap. I will use Just-In-Time (JIT) reading to load the specific details of each phase only when that phase officially begins."
+6. Create `.ai/context/BUILD-PHASES.md` (phase breakdown) based on the structural skim. See lifecycle rules below.
+7. Update `PROJECT_STATUS.md` dashboard metrics with current state.
+8. **Regenerate `.ai/manifest.json`** with updated file hashes and line counts for any files that were created or modified.
 9. Proceed to Planning phase (workflow step 02).
 
 ## BUILD-PHASES.md Lifecycle Summary

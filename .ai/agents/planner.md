@@ -36,6 +36,7 @@ Use for converting requirements into implementation-ready tasks.
 | **Input** | Requirements doc, PRD, or validated design | Feature description, acceptance criteria, constraints |
 | **Output** | Plan file in `docs/plans/YYYY-MM-DD-<feature>.md` | Bite-sized tasks with file paths, code, test commands, expected output |
 | **Output** | BUILD-PHASES.md updated | Ordered phases, dependencies, task-to-requirement mapping |
+| **Output** | ADRs in `.ai/context/decisions/` | When significant technology or pattern choices are made during planning |
 
 ## Recovery Paths
 

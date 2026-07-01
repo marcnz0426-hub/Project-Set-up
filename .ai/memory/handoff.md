@@ -8,6 +8,7 @@ Before stopping, switching models, or hitting a rate limit, replace the current 
 
 - Current goal: TBD
 - Current phase: TBD
+- Dashboard metrics: Tasks (X/Y), Tests (X/Y), Coverage (X%), Bugs (X)
 - Last agent/model: TBD
 - Completed work: TBD
 - Changed files: TBD

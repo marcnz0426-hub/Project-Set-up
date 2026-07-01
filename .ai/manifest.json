@@ -1,0 +1,126 @@
+{
+  "version": "1.0",
+  "generated_at": null,
+  "note": "Regenerate after editing any listed file. Run health-check to validate.",
+  "files": {
+    "AGENTS.md": {
+      "hash": null,
+      "summary": "Agent entry point — startup sequence, role selection, operating rules",
+      "lines": 0,
+      "tier": "always",
+      "last_modified": null
+    },
+    ".ai/README.md": {
+      "hash": null,
+      "summary": "Control center overview — lists all .ai subdirectories and their purpose",
+      "lines": 18,
+      "tier": "always",
+      "last_modified": null
+    },
+    "PROJECT_STATUS.md": {
+      "hash": null,
+      "summary": "Dashboard metrics, phase progress, blockers, and detailed work log",
+      "lines": 0,
+      "tier": "always",
+      "last_modified": null
+    },
+    ".ai/context/INDEX.md": {
+      "hash": null,
+      "summary": "Lists all context files with types, summaries, and sizes — read first",
+      "lines": 53,
+      "tier": "always",
+      "last_modified": null
+    },
+    ".ai/context/purpose.md": {
+      "hash": null,
+      "summary": "Project vision, goals, target users, scope, success criteria — template with TODO placeholders",
+      "lines": 85,
+      "tier": "always",
+      "last_modified": null
+    },
+    ".ai/context/architecture.md": {
+      "hash": null,
+      "summary": "Tech stack, folder structure, key dependencies, design decisions — template with TODO placeholders",
+      "lines": 98,
+      "tier": "on-demand",
+      "last_modified": null
+    },
+    ".ai/context/domain.md": {
+      "hash": null,
+      "summary": "Business rules, domain terminology, user personas, journeys — template with TODO placeholders",
+      "lines": 103,
+      "tier": "on-demand",
+      "last_modified": null
+    },
+    ".ai/context/BUILD-PHASES.md": {
+      "hash": null,
+      "summary": "Agent-generated phase breakdown with tasks, dependencies, and acceptance criteria",
+      "lines": 194,
+      "tier": "on-demand",
+      "last_modified": null
+    },
+    ".ai/rules/build-discipline.md": {
+      "hash": null,
+      "summary": "PRD strict adherence, no scope creep, Plan Mode enforcement, partial read notification",
+      "lines": 91,
+      "tier": "mandatory",
+      "last_modified": null
+    },
+    ".ai/rules/security.md": {
+      "hash": null,
+      "summary": "OWASP-style rules: secrets, input validation, auth, authorization, API security, error handling",
+      "lines": 107,
+      "tier": "mandatory",
+      "last_modified": null
+    },
+    ".ai/rules/coding-standards.md": {
+      "hash": null,
+      "summary": "Code style defaults, mandatory reading list, design system references",
+      "lines": 32,
+      "tier": "on-demand",
+      "last_modified": null
+    },
+    ".ai/rules/testing.md": {
+      "hash": null,
+      "summary": "TDD rules, coverage guidelines, mocking boundaries, framework expectations",
+      "lines": 56,
+      "tier": "on-demand",
+      "last_modified": null
+    },
+    ".ai/rules/git-workflow.md": {
+      "hash": null,
+      "summary": "Branch strategy, conventional commits, rebase vs merge, tagging",
+      "lines": 47,
+      "tier": "on-demand",
+      "last_modified": null
+    },
+    ".ai/workflow/workflow-order.md": {
+      "hash": null,
+      "summary": "16-phase workflow with fast-path/compressed/full flows, error taxonomy, rollback procedures",
+      "lines": 304,
+      "tier": "always",
+      "last_modified": null
+    },
+    ".ai/memory/index.md": {
+      "hash": null,
+      "summary": "Compact map of active bugs, fix patterns, known issues, lessons, archive pointers",
+      "lines": 31,
+      "tier": "always",
+      "last_modified": null
+    },
+    "design/design-system/tokens.md": {
+      "hash": null,
+      "summary": "Colors, typography, spacing, shadows, border radius, motion design tokens",
+      "lines": 155,
+      "tier": "on-demand",
+      "last_modified": null
+    },
+    "design/components/inventory.md": {
+      "hash": null,
+      "summary": "Component list with variants, states, usage rules, composition patterns",
+      "lines": 248,
+      "tier": "on-demand",
+      "last_modified": null
+    }
+  }
+}

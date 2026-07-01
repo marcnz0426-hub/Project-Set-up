@@ -8,15 +8,20 @@ This template provides a workflow system for AI agents to coordinate work across
 
 Every AI agent session starts with `AGENTS.md`. This file tells the agent what to read, in what order, and which persona to use.
 
-### Step 2: Fill In Context Files
+### Step 2: Run the Setup Wizard
 
-The `.ai/context/` folder contains files that describe your project. Fill these in for your specific project:
+The fastest way to configure your project is to run the interactive setup wizard. Ask your AI to run:
 
-| File | What To Fill | Why It Matters |
-|------|-------------|----------------|
-| `.ai/context/purpose.md` | Project vision, goals, users, scope | Agents make decisions based on your purpose |
-| `.ai/context/architecture.md` | Tech stack, folder structure, design decisions | Agents place files correctly, use right tools |
-| `.ai/context/domain.md` | Business rules, terminology, personas | Agents understand domain constraints |
+```bash
+.ai/commands/setup-wizard.md
+```
+
+The wizard will guide you through:
+- Project vision, goals, and scope (`purpose.md`)
+- Tech stack (`architecture.md`)
+- Business rules and personas (`domain.md`)
+- Design system defaults (`tokens.md`)
+- Loading templates for PRDs and design specs
 
 ### Step 3: Set Up Design Tokens
 
@@ -43,12 +48,21 @@ cp .ai/context/templates/UI-design.md .ai/context/UI-design.md
 
 Then update `.ai/context/INDEX.md` with the new file paths and sizes.
 
-### Step 5: Run Health Check
+### Step 5: Platform Setup
+
+If you're using a specific AI coding tool, copy the matching adapter to your project root:
+- **Claude Code**: Copy `.ai/adapters/claude-code.md` to `CLAUDE.md`
+- **Cursor**: Copy `.ai/adapters/cursor.md` to `.cursorrules`
+- **Windsurf**: Copy `.ai/adapters/windsurf.md` to `.windsurfrules`
+- **Antigravity**: Copy `.ai/adapters/antigravity.md` to `.agents/AGENTS.md`
+
+### Step 6: Run Health Check
 
 Run the health check command to verify everything is connected:
 
 ```bash
-# An AI agent will run: .ai/commands/health-check.md
+# Ask your AI agent to run:
+.ai/commands/health-check.md
 ```
 
 Expected: "Scaffolding verified. Ready to proceed."

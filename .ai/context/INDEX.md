@@ -37,6 +37,15 @@ When starting a real project, copy these template files to `.ai/context/` and fi
 | templates/UX-copy.md | UX | Labels, error messages, onboarding copy template | ~70 lines |
 | templates/UI-design.md | UI | Visual system, component specs, design tokens template | ~75 lines |
 
+## Architecture Decisions (ADRs)
+
+| File | Type | Summary | Size |
+|------|------|---------|------|
+| decisions/README.md | ADR | How to write and use architecture decision records | ~50 lines |
+| decisions/template.md | ADR | Blank template for new decisions | ~40 lines |
+
+_ADRs are numbered sequentially (001, 002, ...) as decisions are made during brainstorming and planning phases._
+
 ## Template Files
 
 Ready-to-fill templates for user-uploaded context files live in `.ai/context/templates/`. When starting a new project:

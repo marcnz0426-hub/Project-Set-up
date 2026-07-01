@@ -1,26 +1,42 @@
 # Project Status
 
-## Current Goal
+## Dashboard
 
-Add partial read tracking for large context files (>500 lines) — agents record where they stop reading, notify the user, and persist the boundary for cross-session resume.
+| Metric | Value | Target |
+|--------|-------|--------|
+| Current Phase | Phase 8 (Partial Read) | — |
+| Tasks Complete | 25 | — |
+| Last Activity | 2026-07-02 | — |
 
-## Current Phase
+## Phase Progress
 
-Phase 8 — Partial Read Tracking
+| Phase | Status | Blockers |
+|-------|--------|----------|
+| 1 Foundation | ✅ Done | — |
+| 2 Structural | ✅ Done | — |
+| 3 Agent Depth | ✅ Done | — |
+| 4 Skill Quality| ✅ Done | — |
+| 5 Infrastructure| ✅ Done | — |
+| 6 Onboarding | ✅ Done | — |
+| 7 Optimization | ✅ Done | — |
+| 8 Partial Read | 🔄 Active | — |
 
-## Active Agent / Model
+## Blockers & Risks
 
-opencode/deepseek-v4-flash-free
+| # | Description | Owner | Since |
+|---|-------------|-------|-------|
+| 1 | No active blockers | — | — |
 
-## Completed Work
+---
 
-### Phase 8 — Partial Read Tracking
+## Detailed Log
 
-- **Phase 00.3 flow updated** (`workflow-order.md`): Context loading now checks for prior partial reads, resumes from boundary, records new truncation points, announces to user, and persists/removes progress entries
-- **Session-state schema** (`.ai/.session-state.json`): Added `context_read_progress` field to store per-file read boundaries (`lines_read`, `stopped_at_line`, `stopped_at_section`, `total_lines`)
-- **Health check resume** (`health-check.md`): Session init validates `context_read_progress` — clears on fresh session, preserves on continuing session, reports carry-over to agent
-- **Build discipline rule** (`build-discipline.md`): New Rule 5a — Partial Read Notification: agent MUST record boundaries, inform user, and persist to session-state
-- **README.md updated**: Documented partial read tracking, session continuity, updated file structure to show `.ai/.session-state.json` and `.ai/context/templates/`
+### Phase 8 — Large Context Handling (Structural Skim & JIT Reading)
+
+- **Phase 00.3 flow updated** (`workflow-order.md`): Replaced 500-line cutoff rule with Structural Skim (reading only headers) and Just-In-Time (JIT) Reading for phase-specific details.
+- **Session-state cleanup** (`health-check.md`): Removed the obsolete `context_read_progress` tracking since JIT reading handles context natively.
+- **Build discipline rule** (`build-discipline.md`): Updated Rule 5a to enforce Structural Skimming and JIT reading instead of partial read notification, adding explicit instructions to flush context between phases.
+- **README.md updated**: Documented Structural Skim & JIT Reading protocol for massive context files.
 
 ### Phase 1 — Foundation & Housekeeping
 

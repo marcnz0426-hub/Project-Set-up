@@ -33,6 +33,7 @@ Use for fuzzy ideas, product thinking, design direction, and requirement discove
 | **Input** | User request or fuzzy idea | Loose description, target users, constraints |
 | **Output** | Design doc in `docs/plans/` or direction recommendation | Requirements, 2-3 approaches with tradeoffs, recommended option |
 | **Output** | Design sections validated incrementally | Architecture, components, data flow, error handling, testing |
+| **Output** | ADR in `.ai/context/decisions/` | When user approves a direction, record the decision, rationale, and rejected alternatives |
 
 ## Recovery Paths
 
