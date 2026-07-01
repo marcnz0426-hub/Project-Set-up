@@ -1,0 +1,19 @@
+{
+  "session_id": null,
+  "started_at": null,
+  "loaded_files": {
+    "AGENTS.md": false,
+    ".ai/README.md": false,
+    "PROJECT_STATUS.md": false,
+    ".ai/context/INDEX.md": false,
+    ".ai/context/purpose.md": false,
+    ".ai/rules/build-discipline.md": false,
+    ".ai/rules/security.md": false,
+    ".ai/workflow/workflow-order.md": false,
+    ".ai/memory/index.md": false
+  },
+  "context_read_progress": {},
+  "loaded_agent": null,
+  "last_activity": null
+}
+
