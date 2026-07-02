@@ -39,6 +39,8 @@ Run this before starting any work session (Phase 00.2) to verify the project sca
    - Check `context_root`, `memory_root`, `skills_root`, `rules_root` directories exist
    - Check `memory_index` file exists
    - Check at least the mandatory rules files exist
+   - Verify `external_cli_tools` exists, the registry policy (`.ai/rules/external-cli-adapters.md`) and adapter template (`.ai/adapters/cli-tool-template.md`) exist.
+   - Verify that any registered CLI adapters resolve to valid files, and their commands are available locally when possible.
 
 4. **Verify skill folders exist:**
    ```

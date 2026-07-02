@@ -17,7 +17,7 @@ Every AI agent must read this file before working on the project.
 3. Read `PROJECT_STATUS.md`.
 4. Read `.ai/context/INDEX.md` (lists all available context files).
 5. Read `.ai/context/purpose.md` (project vision, goals, users — always read).
-6. Read `.ai/rules/build-discipline.md` and `.ai/rules/security.md` (mandatory).
+6. Read `.ai/rules/build-discipline.md`, `.ai/rules/security.md`, and `.ai/rules/external-cli-adapters.md` (mandatory).
 7. Read `.ai/workflow/workflow-order.md`.
 8. Read the relevant `.ai/agents/*.md` persona for the role you are performing.
 9. Read `.ai/memory/index.md` before opening detailed memory files.
@@ -52,6 +52,7 @@ When user uploads context files (PRD.md, UX-design.md, UX-copy.md, UI-design.md)
 - When a fix pattern is reusable, add or update `.ai/memory/fix-patterns.md`.
 - When memory exceeds policy thresholds, run `.ai/commands/prune-memory.md`.
 - **Platform adapters:** If using Claude Code, Cursor, Windsurf, or other tools, check `.ai/adapters/` for platform-specific entry points.
+- **External CLIs:** If the user requests an installed CLI (e.g. Jules, OpenCode) with no adapter, auto-register it before use. Do not install missing CLIs, do not guess command syntax, do not pass secrets into external tools, and do not let review-only tools edit files.
 
 ## Role Selection
 

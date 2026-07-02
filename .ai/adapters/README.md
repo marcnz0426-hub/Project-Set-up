@@ -1,4 +1,4 @@
-# Platform Adapters
+# Platform & External CLI Adapters
 
 This folder contains platform-specific entry points that translate the generic AI Project Starter template into native configuration for different AI coding tools.
 
@@ -16,7 +16,19 @@ This folder contains platform-specific entry points that translate the generic A
 | OpenCode | `opencode.md` | Project root | `opencode.md` |
 | Windsurf | `windsurf.md` | Project root | `.windsurfrules` |
 
-## What Adapters Do
+## External CLI Adapters
+
+In addition to platform adapters, this folder stores **External CLI Adapters** (e.g., `jules.md`, `opencode.md`). These allow the orchestrator to dynamically invoke installed CLI tools or coding agents (like Jules, OpenCode, Aider, Gemini CLI, Claude CLI, Codex CLI, Antigravity, or future CLIs).
+
+### How Auto-Registration Works
+If you ask the orchestrator to use a specific installed CLI (e.g., "Use OpenCode for the frontend"), and an adapter doesn't exist, the orchestrator will:
+1. Verify the CLI is installed locally using non-mutating checks.
+2. Auto-register the tool by generating a new adapter file based on `.ai/adapters/cli-tool-template.md`.
+3. Save it here to define the tool's roles, file-edit permissions, prompt format, and output contract.
+
+**Important:** These adapters describe *how* to use the command safely, but they **do not prove the CLI is installed** permanently. The orchestrator will always verify the CLI's presence before dispatching tasks.
+
+## What Platform Adapters Do
 
 Each adapter:
 - **Points to** the canonical `AGENTS.md` startup sequence (not duplicating it)

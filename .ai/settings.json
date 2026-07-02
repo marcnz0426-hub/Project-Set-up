@@ -2,6 +2,12 @@
   "template_name": "AI Project Starter",
   "template_type": "generic-multi-ai",
   "version": "1.3.0",
+  "allows_external_cli_auto_registration": true,
+  "external_cli_tools": {
+    "adapter_template": ".ai/adapters/cli-tool-template.md",
+    "registry_policy": ".ai/rules/external-cli-adapters.md",
+    "registered": {}
+  },
   "entrypoint": "AGENTS.md",
   "platform": {
     "current": "generic",

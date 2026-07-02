@@ -13,7 +13,7 @@ Use this order unless the user explicitly asks for a narrower task.
 | -1 | Investigation (Plan Mode) | `.ai/rules/build-discipline.md` | Read-only investigation before any action. Read, search, propose — NO file writes or code changes. | Requirements understood; direction proposed; user approved next phase. |
 | 00 | **Runtime & Setup** | | | |
 | &emsp;00.1 | Skill loading | `.ai/skills/00-runtime/using-superpowers` | Find and apply relevant skills. | All relevant skills loaded; `PROJECT_STATUS.md` up to date. |
-| &emsp;00.2 | Environment preflight | `.ai/commands/health-check.md` | Check git state, environment, tool availability, and dependency existence (package.json, requirements.txt, etc.) before work begins. | Git branch/status clean; required CLIs verified; project deps present; environment summary reported. |
+| &emsp;00.2 | Environment preflight | `.ai/commands/health-check.md` | Check git state, environment, verify and register requested external CLIs, confirm role boundaries, and dependency existence (package.json, requirements.txt, etc.) before work begins. | Git branch/status clean; required CLIs verified and adapters registered; role boundaries confirmed; missing CLI, auth, or syntax issues treated as blockers; project deps present; environment summary reported. |
 | &emsp;00.3 | Context loading | `.ai/context/` | Read INDEX.md, purpose.md, and load on-demand context files. | Core context files read; uploaded files parsed; TRACEABILITY-MATRIX.md created. |
 | &emsp;00.4 | Phase breakdown | `.ai/skills/02-planning/build-phases` | Break down work into ordered phases with dependencies. | BUILD-PHASES.md created with numbered phases, tasks, and acceptance criteria. |
 | 01 | Brainstorming | `.ai/skills/01-brainstorming/brainstorming` | Clarify intent, requirements, options, and tradeoffs. | Requirements documented; user approved direction; 2-3 approaches explored; **ADR written for approved direction** (`.ai/context/decisions/`). |
@@ -251,6 +251,14 @@ Phase 15 (Retro) fails:
 ```
 
 **Rule:** After any rollback, re-run the target phase and its exit criteria before retrying the failed phase.
+
+## External CLI Adapter Auto-Registration
+
+If a user explicitly requests an installed CLI or coding agent (e.g., Jules, OpenCode):
+- **During preflight (Phase 00.2):** If the CLI is known upfront, verify its installation and auto-register its adapter before the workflow begins.
+- **Mid-workflow:** If requested immediately before agent assignment or mid-task, pause to discover, verify, and auto-register the CLI adapter before dispatching the task.
+
+*See `.ai/rules/external-cli-adapters.md` for strict discovery rules, safety limits, and prompt/output contracts.*
 
 ## Context Loading Flow (Phase 00.3)
 
